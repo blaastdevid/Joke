@@ -1,0 +1,24 @@
+{
+	"style": {
+		"background-color": "#8cd2fd",
+		"border": 10,
+		"overflow": true
+	},
+
+	"contents": [
+		{
+			"name": "title",
+			"control": "TextView",
+			"style": {
+				"border": "0 0 10 0",
+				"font-size": "large",
+				"font-weight": "bold",
+				"color": "#e85050"
+			}
+		},
+		{
+			"name": "content",
+			"control": "TextView"
+		}
+	]
+}

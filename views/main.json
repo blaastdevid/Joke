@@ -1,0 +1,14 @@
+{
+	"style": {
+		"background-color": "#8cd2fd",
+		"border": 3,
+		"overflow":"auto"
+	},
+
+	"contents": [
+		{
+			"control": "ImageView",
+			"name": "title"
+		}
+	]
+}
