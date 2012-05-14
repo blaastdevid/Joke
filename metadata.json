@@ -1,4 +1,7 @@
 {
 	"name": "Ketawa",
-	"default-view": "main"
+	"default-view": "main",
+    "packages": {
+        "cheerio": "0.7.0"
+    }
 }

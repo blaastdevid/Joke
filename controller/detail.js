@@ -11,13 +11,34 @@ function getTotalHeight(controls) {
 	return total;
 }
 
+function DB() {
+    this.storage = app.storage('db');
+}
+
+DB.prototype = {
+    isExist: function(key, cb) {
+        var data = this.storage.get(key);
+        if (data) {
+            cb(true, data);
+        } else {
+            cb(false);
+        }
+    },
+    
+    save: function(key, value) {
+        this.storage.set(key, value);
+    }
+};
+
 _.extend(exports, {
 	':load': function() {
 		var self = this;
+        self.db = new DB();
 		app.on('message', function(action, param){
 			if(action === 'getContent'){
 				clearInterval(self.intervalId);
 				delete self.intervalId;
+                self.db.save(param.title, {content: param.content});
 				self.get('title').label(param.title);
 				self.get('content').label(param.content);
 			}
@@ -45,7 +66,16 @@ _.extend(exports, {
 			
 			self.get('content').label('Silahkan Tunggu' + temp);	
 		}, 500);
-		app.msg('getContent', {action:'getContent', url: param.url, title: param.title});
+        self.db.isExist(param.title, function(exist, data) {
+            if (exist) {
+                clearInterval(self.intervalId);
+                delete self.intervalId;
+                self.get('title').label(param.title);
+				self.get('content').label(data.content);
+            } else {
+                app.msg('getContent', {action:'getContent', url: param.url, title: param.title});
+            }
+        });
 	},
 	
 	':keypress': function(key) {

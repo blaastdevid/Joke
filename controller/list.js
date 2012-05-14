@@ -54,7 +54,7 @@ _.extend(exports, {
 						});
 					}
 					temp.on('activate', function(){
-						app.setContent('detail', {url: item.url, title: item.title});
+						app.pushView('detail', {url: item.url, title: item.title});
 					});
 					temp.on('focus', function(){
 						this.style({
